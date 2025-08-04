@@ -10,7 +10,13 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     hostName = "grimoire";
+    primaryUser = "serenity";
+
     configuration = { pkgs, ... }: {
+
+      # Define primary user as above; will swap to flake-based configuration eventually 
+      system.primaryUser = primaryUser;
+
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
@@ -19,6 +25,14 @@
 
       programs.zsh = {
         enable = true;
+      };
+
+      homebrew = {
+        enable = true;
+        brews = [
+          "gnupg"
+          "neovim"
+        ];
       };
 
       # Necessary for using flakes on this system.
