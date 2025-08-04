@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Serenity's Grimoire, faer dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -27,6 +27,7 @@
         enable = true;
       };
 
+      # To be split out to a module
       homebrew = {
         enable = true;
         brews = [
