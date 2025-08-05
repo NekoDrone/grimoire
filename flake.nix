@@ -1,5 +1,5 @@
 {
-  description = "Serenity's Grimoire, faer dotfiles";
+  description = "Serenity's Grimoire, faer nix-darwin dotfiles";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -9,6 +9,7 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
+    # split this into a config location pls
     hostName = "grimoire";
     primaryUser = "serenity";
 
@@ -16,6 +17,10 @@
 
       # Define primary user as above; will swap to flake-based configuration eventually 
       system.primaryUser = primaryUser;
+
+      imports = [
+	"${self}/modules/homebrew"
+      ];
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
@@ -27,23 +32,8 @@
         enable = true;
       };
 
-      # To be split out to a module
-      homebrew = {
-        enable = true;
-        brews = [
-          "gnupg"
-          "neovim"
-        ];
-        casks = [
-          "ghostty"
-        ];
-      };
-
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
-
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -57,9 +47,6 @@
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#{host-name}
-    # (replace {host-name} with your system's host name as defined above as hostName)
     darwinConfigurations."${hostName}" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
