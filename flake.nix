@@ -34,6 +34,9 @@
           "gnupg"
           "neovim"
         ];
+        casks = [
+          "ghostty"
+        ];
       };
 
       # Necessary for using flakes on this system.
