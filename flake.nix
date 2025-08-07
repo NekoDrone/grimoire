@@ -11,37 +11,16 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
-    # split this into a config location pls
-    # hostName = "grimoire";
-    primaryUser = "serenity";
-
     configuration = { pkgs, ... }: {
 
       # Define primary user as above; will swap to flake-based configuration eventually 
-      system.primaryUser = primaryUser;
+      # system.primaryUser = primaryUser;
 
-      imports = [
-	"${self}/modules/homebrew"
-      ];
 
       # List packages installed in system profile.
-
       programs.zsh = {
         enable = true;
       };
-
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
 
       users.users.serenity = {
         name = "serenity";
@@ -51,8 +30,13 @@
   in
   {
     darwinConfigurations."grimoire" = nix-darwin.lib.darwinSystem {
+      specialArgs = {
+        inherit self;
+      };
       modules = [
         configuration
+	./core
+	./modules/homebrew
 	home-manager.darwinModules.home-manager
 	{
 	  home-manager.useGlobalPkgs = true;
