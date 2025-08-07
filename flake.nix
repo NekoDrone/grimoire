@@ -5,12 +5,14 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     # split this into a config location pls
-    hostName = "grimoire";
+    # hostName = "grimoire";
     primaryUser = "serenity";
 
     configuration = { pkgs, ... }: {
@@ -22,11 +24,7 @@
 	"${self}/modules/homebrew"
       ];
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ pkgs.vim
-        ];
+      # List packages installed in system profile.
 
       programs.zsh = {
         enable = true;
@@ -44,11 +42,23 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      users.users.serenity = {
+        name = "serenity";
+	home = "/Users/serenity";
+      };
     };
   in
   {
-    darwinConfigurations."${hostName}" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+    darwinConfigurations."grimoire" = nix-darwin.lib.darwinSystem {
+      modules = [
+        configuration
+	home-manager.darwinModules.home-manager
+	{
+	  home-manager.useGlobalPkgs = true;
+	  home-manager.useUserPackages = true;
+	}
+      ];
     };
   };
 }
