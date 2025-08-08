@@ -10,6 +10,7 @@
     brews = [
       "neovim"
       "gnupg"
+      "pinentry-mac"
     ];
   };
 }
