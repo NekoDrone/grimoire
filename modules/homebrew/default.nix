@@ -1,8 +1,8 @@
-{ ... }:
 {
   imports = [
     ./casks.nix
   ];
+
   homebrew = {
     enable = true;
 
@@ -11,5 +11,5 @@
       "neovim"
       "gnupg"
     ];
-  };  
+  };
 }
