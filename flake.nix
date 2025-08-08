@@ -3,19 +3,24 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+ 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ nix-darwin, self, ... }:
   let
     configuration = { pkgs, ... }: {
 
       # Define primary user as above; will swap to flake-based configuration eventually 
       # system.primaryUser = primaryUser;
-
 
       # List packages installed in system profile.
       programs.zsh = {
@@ -31,12 +36,12 @@
   {
     darwinConfigurations."grimoire" = nix-darwin.lib.darwinSystem {
       specialArgs = {
-        inherit self;
+        inherit self inputs;
       };
       modules = [
         configuration
 	./core
-	./modules/homebrew
+	./modules
 	home-manager.darwinModules.home-manager
 	{
 	  home-manager.useGlobalPkgs = true;
