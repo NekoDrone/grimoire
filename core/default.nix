@@ -1,9 +1,9 @@
-{ pkgs, self, ... }:
+{ self, ... }:
 
 let
   # configure ur stuff here
   username = "serenity";
-  hostname = "grimoire";
+  # hostname = "grimoire";
 in
 {
   # required for homebrew to be managed with nix-darwin.
@@ -11,7 +11,10 @@ in
   system.primaryUser = username;
 
   # required to run nix-darwin and flakes
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # darwin-version git commit hash
   system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -23,9 +26,13 @@ in
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  users.users.serenity = {
+    name = username;
+    home = "/Users/${username}";
+  };
+
   # config.grimoire = {
   #   username = username;
   #   hostname = hostname;
   # }
 }
-
