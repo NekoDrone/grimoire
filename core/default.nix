@@ -3,7 +3,7 @@
 let
   # configure ur stuff here
   username = "serenity";
-  # hostname = "grimoire";
+  hostname = "grimoire";
 in
 {
   # required for homebrew to be managed with nix-darwin.
@@ -29,6 +29,12 @@ in
   users.users.serenity = {
     name = username;
     home = "/Users/${username}";
+  };
+
+  networking = {
+    # you'll probably wanna change this too
+    computerName = "Serenity's Grimoire";
+    hostName = hostname;
   };
 
   # config.grimoire = {
