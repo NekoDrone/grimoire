@@ -7,7 +7,7 @@
     syntaxHighlighting.enable = true;
 
     dotDir = "${config.xdg.configHome}/zsh";
-    initExtra = ''
+    initContent = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
   };
