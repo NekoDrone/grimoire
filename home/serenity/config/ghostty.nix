@@ -11,6 +11,7 @@ let
   # https://ghostty.org/docs/config/reference
   ghosttyConfig = {
     font-family = "MonaspiceKr Nerd Font Mono";
+    font-size = "15";
     theme = "light:${themeName},dark:${themeName}";
   };
 
