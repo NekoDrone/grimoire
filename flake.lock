@@ -1,5 +1,67 @@
 {
   "nodes": {
+    "atelier": {
+      "inputs": {
+        "gift-wrap": "gift-wrap",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1756476626,
+        "narHash": "sha256-brrvF1vm4kllEk/o0v0JFyq4q+Z7qXmQfXyjDG+hq1c=",
+        "owner": "NekoDrone",
+        "repo": "atelier",
+        "rev": "9280329463d6a851e49945af92eef1a5d20c358b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NekoDrone",
+        "repo": "atelier",
+        "type": "github"
+      }
+    },
+    "gift-wrap": {
+      "inputs": {
+        "nixpkgs": [
+          "atelier",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755117209,
+        "narHash": "sha256-B0og+vIax+zPutvST/6n96skJW/p2Xx07WM27ThsybE=",
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "rev": "6b87008fe1aeca64738b69c6e37fb43caa85dab2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "type": "github"
+      }
+    },
+    "gift-wrap_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755117209,
+        "narHash": "sha256-B0og+vIax+zPutvST/6n96skJW/p2Xx07WM27ThsybE=",
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "rev": "6b87008fe1aeca64738b69c6e37fb43caa85dab2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tgirlcloud",
+        "repo": "gift-wrap",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -59,6 +121,8 @@
     },
     "root": {
       "inputs": {
+        "atelier": "atelier",
+        "gift-wrap": "gift-wrap_2",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"

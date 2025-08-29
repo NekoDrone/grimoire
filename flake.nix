@@ -14,10 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # atelier = {
-    #   url = "github:NekoDrone/nvim";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    atelier = {
+      url = "github:NekoDrone/atelier";
+      # url = "path:/Users/serenity/Projects/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    gift-wrap = {
+      url = "github:tgirlcloud/gift-wrap";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
