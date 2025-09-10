@@ -2,5 +2,6 @@
 {
   fonts.packages = with pkgs; [
     nerd-fonts.monaspace
+    maple-mono.NF
   ];
 }
