@@ -14,6 +14,7 @@ let
     font-size = "15";
     font-style = "Light";
     theme = "light:${themeName},dark:${themeName}";
+    adjust-cell-height = "15%";
   };
 
   configText = concatStringsSep "\n" (mapAttrsToList (key: value: "${key} = ${value}") ghosttyConfig);
