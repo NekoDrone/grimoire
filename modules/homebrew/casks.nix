@@ -6,6 +6,7 @@
       "bruno"
       "ghostty"
       "inkscape"
+      "obs"
     ];
   };
 }
