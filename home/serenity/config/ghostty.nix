@@ -10,8 +10,9 @@ let
   # each config option that ghostty supports can be written here
   # https://ghostty.org/docs/config/reference
   ghosttyConfig = {
-    font-family = "MonaspiceKr Nerd Font Mono";
+    font-family = "Maple Mono NF";
     font-size = "15";
+    font-style = "Light";
     theme = "light:${themeName},dark:${themeName}";
   };
 
