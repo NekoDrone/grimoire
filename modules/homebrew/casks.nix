@@ -8,6 +8,7 @@
       "inkscape"
       "obs"
       "docker"
+      "vscodium"
     ];
   };
 }
