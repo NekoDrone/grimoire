@@ -7,6 +7,7 @@
       "ghostty"
       "inkscape"
       "obs"
+      "docker"
     ];
   };
 }
